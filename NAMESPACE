@@ -2,6 +2,7 @@
 
 export(header)
 export(ifd)
+export(ifd_entry)
 export(order_bytes)
 export(raw_bytes)
 export(read_cr2)
