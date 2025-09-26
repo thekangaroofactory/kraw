@@ -19,7 +19,7 @@ read_cr2 <- function(file, image = FALSE, mapping_exif = NULL, mapping_canon = N
 
   # -- read binary file
   # n = 16 (= one row) * nb row to read
-  raw_vector <- readBin(file, what = "raw", n = 2120000)
+  raw_vector <- readBin(file, what = "raw", n = 2200000)
 
 
   # ----------------------------------------------------------------------------
