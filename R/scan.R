@@ -8,7 +8,9 @@
 #' @export
 #'
 #' @examples
-#' scan(path = ".")
+#' \dontrun{
+#' report <- scan(path = ".")
+#' }
 
 scan <- function(path){
 
