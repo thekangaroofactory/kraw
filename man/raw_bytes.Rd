@@ -7,20 +7,20 @@
 raw_bytes(x, offset = 0, n = 1)
 }
 \arguments{
-\item{x}{a vector of raw bytes}
+\item{x}{a vector of raw bytes.}
 
-\item{offset}{an integer, to indicate the lower limit of the sequence}
+\item{offset}{an integer, to indicate the lower limit of the sequence.}
 
-\item{n}{an integer, to indicate the length of the sequence}
+\item{n}{an integer, to indicate the length of the sequence.}
 }
 \value{
-a vector of raw bytes
+a vector of raw bytes.
 }
 \description{
 Sequence of Bytes
 }
 \details{
-Note that offset = 0 (default) is the index of the first element of the list
+Note that offset = 0 (default) is the index of the first element of the list.
 }
 \examples{
 \dontrun{

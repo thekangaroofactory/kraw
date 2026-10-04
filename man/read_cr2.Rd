@@ -4,19 +4,24 @@
 \alias{read_cr2}
 \title{Read CR2 File}
 \usage{
-read_cr2(file, image = FALSE, mapping_exif = NULL, mapping_canon = NULL)
+read_cr2(
+  file,
+  image = FALSE,
+  mapping_exif = mapping_exif,
+  mapping_canon = mapping_canon
+)
 }
 \arguments{
-\item{file}{the file to read (including path)}
+\item{file}{the file to read (including its path).}
 
-\item{image}{a logical whether the images should be loaded or not (default FALSE)}
+\item{image}{a logical whether the images should be loaded or not (default FALSE).}
 
-\item{mapping_exif}{a data.frame of the EXIF tag mapping}
+\item{mapping_exif}{a data.frame of the EXIF tag mapping.}
 
-\item{mapping_canon}{a data.frame of the Canon tag mapping}
+\item{mapping_canon}{a data.frame of the Canon tag mapping.}
 }
 \value{
-a list of metadata
+a list.
 }
 \description{
 Read CR2 File

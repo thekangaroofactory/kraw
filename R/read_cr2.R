@@ -2,12 +2,12 @@
 
 #' Read CR2 File
 #'
-#' @param file the file to read (including path)
-#' @param image a logical whether the images should be loaded or not (default FALSE)
-#' @param mapping_exif a data.frame of the EXIF tag mapping
-#' @param mapping_canon a data.frame of the Canon tag mapping
+#' @param file the file to read (including its path).
+#' @param image a logical whether the images should be loaded or not (default FALSE).
+#' @param mapping_exif a data.frame of the EXIF tag mapping.
+#' @param mapping_canon a data.frame of the Canon tag mapping.
 #'
-#' @returns a list of metadata
+#' @returns a list.
 #' @export
 #'
 #' @examples
@@ -15,7 +15,7 @@
 #' read_cr2(file = "C:/download/example.CR2")
 #' }
 
-read_cr2 <- function(file, image = FALSE, mapping_exif = NULL, mapping_canon = NULL){
+read_cr2 <- function(file, image = FALSE, mapping_exif = mapping_exif, mapping_canon = mapping_canon){
 
   # -- read binary file
   # n = 16 (= one row) * nb row to read

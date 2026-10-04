@@ -7,14 +7,16 @@
 scan(path)
 }
 \arguments{
-\item{path}{the path of the folder to scan}
+\item{path}{the path to scan.}
 }
 \value{
-a data.frame of the metadata
+a data.frame of the metadata.
 }
 \description{
 Scan Folder
 }
 \examples{
-scan(path = ".")
+\dontrun{
+report <- scan(path = ".")
+}
 }

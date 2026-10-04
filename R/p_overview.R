@@ -1,38 +1,32 @@
 
 
-#' Metadata Visualization
+#' Overview Plot
 #'
-#' @param metadata a data.frame of the metadata (output of scan function)
+#' @param metadata a data.frame (see details).
 #'
-#' @returns a ggplot object
+#' @details
+#' `metadata` expects an output from the [scan()] function.
+#'
+#' @seealso [scan()]
+#'
+#' @returns a ggplot object.
 #' @export
-#' @importFrom dplyr "%>%"
 #'
 #' @examples
 #' \dontrun{
 #' viz(scan(path = "."))
 #' }
 
-viz <- function(metadata){
+p_overview <- function(metadata){
 
-  # ----------------------------------------------------------------------------
+  # ////////////////////////////////////////////////////////////////////////////
   # Plots
-  # ----------------------------------------------------------------------------
 
   # -- camera
-  camera <- ggplot2::ggplot(metadata %>%
-                              dplyr::group_by(camera) %>%
-                              dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = camera),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("Camera") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
+  camera <- p_camera(data = metadata |>
+                       dplyr::group_by(camera) |>
+                       dplyr::summarise(n = dplyr::n()),
+                     bg = "#D6CCC2")
 
 
   # -- lens
@@ -52,20 +46,10 @@ viz <- function(metadata){
 
 
   # -- orientation
-  orientation <- ggplot2::ggplot(metadata %>%
-                                   dplyr::group_by(orientation) %>%
-                                   dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = stats::reorder(orientation, n)),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("Orientation") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
-
+  orientation <- p_orientation(nl = sum(metadata$orientation == 1),
+                               np = sum(metadata$orientation == 8),
+                               fg = "#000",
+                               bg = "#D6CCC2")
 
   # -- focal length
   focal_length <- ggplot2::ggplot(metadata %>%
@@ -131,13 +115,12 @@ viz <- function(metadata){
       panel.grid = ggplot2::element_blank())
 
 
-  # ----------------------------------------------------------------------------
+  # ////////////////////////////////////////////////////////////////////////////
   # Legend
-  # ----------------------------------------------------------------------------
 
-  label = paste(nrow(metadata), "RAW Images\n",
-                nrow(camera$data), "Cameras\n",
-                nrow(lens_model$data), "Lenses", sep = "")
+  label = paste(nrow(metadata), paste0("RAW Image", if(nrow(metadata) > 1) "s", "\n"),
+                nrow(camera$data), paste0("Camera", if(nrow(camera$data) > 1) "s", "\n"),
+                nrow(lens_model$data), paste0("Lense", if(nrow(lens_model$data) > 1) "s"), sep = "")
 
   legend <- ggplot2::ggplot() +
     ggplot2::theme_void() +
@@ -146,12 +129,12 @@ viz <- function(metadata){
                        size = 12, color = "#BEAD9D", lineheight = 0.7)
 
 
-  # ----------------------------------------------------------------------------
+  # ////////////////////////////////////////////////////////////////////////////
   # Layout & return
-  # ----------------------------------------------------------------------------
 
-  ggpubr::ggarrange(legend, camera, lens_model,
-                    exposure_time, f_number, focal_length, iso_speed, orientation,
+  ggpubr::ggarrange(legend, camera, orientation,
+                    lens_model, f_number, focal_length,
+                    exposure_time, iso_speed,
                     ncol = 3, nrow = 3,
                     heights = c(1, 2, 1)) +
     ggpubr::bgcolor("#FFF")

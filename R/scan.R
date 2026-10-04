@@ -2,9 +2,9 @@
 
 #' Scan Folder
 #'
-#' @param path the path of the folder to scan
+#' @param path the path to scan.
 #'
-#' @returns a data.frame of the metadata
+#' @returns a data.frame of the metadata.
 #' @export
 #'
 #' @examples
@@ -14,7 +14,7 @@
 
 scan <- function(path){
 
-  # -- scan folder
+  # -- folder files
   files <- list.files(path, pattern = "*.CR2", full.names = TRUE, recursive = TRUE)
 
   # -- read metadata & merge
