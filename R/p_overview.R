@@ -11,6 +11,7 @@
 #'
 #' @returns a ggplot object.
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @examples
 #' \dontrun{
@@ -30,11 +31,11 @@ p_overview <- function(metadata){
 
 
   # -- lens
-  lens_model <- ggplot2::ggplot(metadata %>%
-                                  dplyr::group_by(lens_model) %>%
+  lens_model <- ggplot2::ggplot(metadata |>
+                                  dplyr::group_by(lens_model) |>
                                   dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = stats::reorder(lens_model, n)),
+    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
+                                   y = stats::reorder(lens_model, .data$n)),
                       stat = "identity",
                       fill = "#D6CCC2",
                       show.legend = FALSE) +
@@ -52,11 +53,11 @@ p_overview <- function(metadata){
                                bg = "#D6CCC2")
 
   # -- focal length
-  focal_length <- ggplot2::ggplot(metadata %>%
-                                    dplyr::group_by(focal_length) %>%
+  focal_length <- ggplot2::ggplot(metadata |>
+                                    dplyr::group_by(focal_length) |>
                                     dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = stats::reorder(focal_length, n)),
+    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
+                                   y = stats::reorder(focal_length, .data$n)),
                       stat = "identity",
                       fill = "#D6CCC2",
                       show.legend = FALSE) +
@@ -68,11 +69,11 @@ p_overview <- function(metadata){
 
 
   # -- ISO
-  iso_speed <- ggplot2::ggplot(metadata %>%
-                                 dplyr::group_by(iso_speed) %>%
+  iso_speed <- ggplot2::ggplot(metadata |>
+                                 dplyr::group_by(iso_speed) |>
                                  dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = stats::reorder(iso_speed, n)),
+    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
+                                   y = stats::reorder(iso_speed, .data$n)),
                       stat = "identity",
                       fill = "#D6CCC2",
                       show.legend = FALSE) +
@@ -84,11 +85,11 @@ p_overview <- function(metadata){
 
 
   # -- Shutter speed
-  exposure_time <- ggplot2::ggplot(metadata %>%
-                                     dplyr::group_by(exposure_time) %>%
+  exposure_time <- ggplot2::ggplot(metadata |>
+                                     dplyr::group_by(exposure_time) |>
                                      dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = stats::reorder(exposure_time, n)),
+    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
+                                   y = stats::reorder(exposure_time, .data$n)),
                       stat = "identity",
                       fill = "#D6CCC2",
                       show.legend = FALSE) +
@@ -100,11 +101,11 @@ p_overview <- function(metadata){
 
 
   # -- Aperture
-  f_number <- ggplot2::ggplot(metadata %>%
-                                dplyr::group_by(f_number) %>%
+  f_number <- ggplot2::ggplot(metadata |>
+                                dplyr::group_by(f_number) |>
                                 dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = n,
-                                   y = stats::reorder(f_number, n)),
+    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
+                                   y = stats::reorder(f_number, .data$n)),
                       stat = "identity",
                       fill = "#D6CCC2",
                       show.legend = FALSE) +

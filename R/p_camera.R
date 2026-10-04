@@ -16,6 +16,7 @@
 #'
 #' @returns a 'ggplot' object.
 #' @export
+#' @importFrom ggplot2 .data
 #'
 #' @examples
 #' p_camera(data.frame(camera = "Canon EOS 70D", n = 10))
@@ -30,15 +31,15 @@ p_camera <- function(data, fg = NA, bg = "grey", theme = p_theme()){
   ggplot2::ggplot(data) +
 
     # -- circles
-    ggforce::geom_circle(ggplot2::aes(x0 = rank,
+    ggforce::geom_circle(ggplot2::aes(x0 = .data$rank,
                                       y0 = 0,
-                                      r = n),
+                                      r = .data$n),
                          color = fg,
                          fill = bg) +
 
     # -- labels
-    ggplot2::geom_text(ggplot2::aes(x = rank,
-                           label = camera),
+    ggplot2::geom_text(ggplot2::aes(x = .data$rank,
+                           label = .data$camera),
                        y = 0) +
 
     # ggplot2::ggtitle("Camera") +

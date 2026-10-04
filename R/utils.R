@@ -23,7 +23,9 @@ to_num <- function(x){
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' tag_id(mapping_exif, "ImageWidth")
+#' }
 
 tag_id <- function(mapping, x){
   mapping[mapping$key == x, ]$tag_id}

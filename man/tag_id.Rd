@@ -18,5 +18,7 @@ a character string.
 Tag Id
 }
 \examples{
+\dontrun{
 tag_id(mapping_exif, "ImageWidth")
+}
 }
