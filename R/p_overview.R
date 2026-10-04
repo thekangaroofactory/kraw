@@ -41,6 +41,11 @@ p_overview <- function(metadata){
                          dplyr::summarise(n = dplyr::n()),
                        bg = "#D6CCC2")
 
+  # -- Aperture
+  f_number <- p_aperture(data = metadata |>
+                           dplyr::group_by(lens_model, f_number) |>
+                           dplyr::summarise(n = dplyr::n()))
+
   # -- focal length
   focal_length <- p_focal(data = metadata |>
                             dplyr::group_by(lens_model, focal_length) |>
@@ -65,35 +70,9 @@ p_overview <- function(metadata){
 
 
   # -- Shutter speed
-  exposure_time <- ggplot2::ggplot(metadata |>
-                                     dplyr::group_by(exposure_time) |>
-                                     dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
-                                   y = stats::reorder(exposure_time, .data$n)),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("Shutter Speed") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
-
-
-  # -- Aperture
-  f_number <- ggplot2::ggplot(metadata |>
-                                dplyr::group_by(f_number) |>
-                                dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
-                                   y = stats::reorder(f_number, .data$n)),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("Aperture") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
+  exposure_time <- p_shutter_speed(data = metadata |>
+                                     dplyr::group_by(lens_model, exposure_time) |>
+                                     dplyr::summarise(n = dplyr::n()))
 
 
   # ////////////////////////////////////////////////////////////////////////////
@@ -117,7 +96,7 @@ p_overview <- function(metadata){
                     lens_model, f_number, focal_length,
                     exposure_time, iso_speed,
                     ncol = 3, nrow = 3,
-                    heights = c(1, 2, 1)) +
+                    heights = c(1, 2, 2)) +
     ggpubr::bgcolor("#FFF")
 
 }
