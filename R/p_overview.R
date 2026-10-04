@@ -74,6 +74,9 @@ p_overview <- function(metadata){
                                      dplyr::group_by(lens_model, exposure_time) |>
                                      dplyr::summarise(n = dplyr::n()))
 
+  # -- Most frequent combination
+  fav_comb <- p_favorite(most_frequent(metadata))
+
 
   # ////////////////////////////////////////////////////////////////////////////
   # Legend
@@ -94,7 +97,7 @@ p_overview <- function(metadata){
 
   ggpubr::ggarrange(legend, camera, orientation,
                     lens_model, f_number, focal_length,
-                    exposure_time, iso_speed,
+                    exposure_time, iso_speed, fav_comb,
                     ncol = 3, nrow = 3,
                     heights = c(1, 2, 2)) +
     ggpubr::bgcolor("#FFF")
