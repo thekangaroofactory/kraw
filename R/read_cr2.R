@@ -233,7 +233,7 @@ read_cr2 <- function(file, image = FALSE, mapping_exif = mapping_exif, mapping_c
     exposure_time = exposure_time,
     f_number = f_number,
     iso_speed = iso_speed_ratings,
-    lens_model = lens_model,
+    lens_model = if(!is.na(lens_model)) lens_model else "unknown",
     focal_length = focal_length,
     exposure_program = exposure_program,
     metering_mode = metering_mode,
