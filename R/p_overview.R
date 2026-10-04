@@ -29,44 +29,24 @@ p_overview <- function(metadata){
                        dplyr::summarise(n = dplyr::n()),
                      bg = "#D6CCC2")
 
-
-  # -- lens
-  lens_model <- ggplot2::ggplot(metadata |>
-                                  dplyr::group_by(lens_model) |>
-                                  dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
-                                   y = stats::reorder(lens_model, .data$n)),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("Lens") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
-
-
   # -- orientation
   orientation <- p_orientation(nl = sum(metadata$orientation == 1),
                                np = sum(metadata$orientation == 8),
                                fg = "#000",
                                bg = "#D6CCC2")
 
-  # -- focal length
-  focal_length <- ggplot2::ggplot(metadata |>
-                                    dplyr::group_by(focal_length) |>
-                                    dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
-                                   y = stats::reorder(focal_length, .data$n)),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("Focal Lengths") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
+  # -- lens
+  lens_model <- p_lens(data = metadata |>
+                         dplyr::group_by(lens_model) |>
+                         dplyr::summarise(n = dplyr::n()),
+                       bg = "#D6CCC2")
 
+  # -- focal length
+  focal_length <- p_focal(data = metadata |>
+                            dplyr::group_by(lens_model, focal_length) |>
+                            dplyr::summarise(n = dplyr::n()),
+                          fg = "#D6CCC2",
+                          bg = "#D6CCC2")
 
   # -- ISO
   iso_speed <- ggplot2::ggplot(metadata |>
