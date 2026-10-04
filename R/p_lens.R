@@ -31,11 +31,12 @@ p_lens <- function(data, fg = "#000", bg = "grey", theme = p_theme()){
 
     # -- segment
     ggplot2::geom_segment(ggplot2::aes(xend = .data$n,
-                                       y = y),
+                                       y = y,
+                                       colour = .data$lens_model),
                           x = 0,
                           linewidth = 4,
+                          alpha = .5,
                           lineend = "round",
-                          colour = bg,
                           show.legend = FALSE) +
 
     # -- labels
