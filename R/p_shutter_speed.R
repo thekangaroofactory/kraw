@@ -22,7 +22,7 @@ p_shutter_speed <- function(data, bg = "grey", theme = p_theme()){
 
   ggplot2::ggplot(data) +
     ggplot2::geom_segment(ggplot2::aes(yend = .data$n,
-                                       x = stats::reorder(exposure_time, .data$n),
+                                       x = .data$exposure_time,
                                        group = .data$lens_model,
                                        colour = .data$lens_model),
                           y = 0,
