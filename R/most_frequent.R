@@ -11,7 +11,7 @@
 #' The function computes the most frequent combination over:
 #' camera, orientation, exposure_time, f_number, iso_speed, lens_model, focal_length
 #'
-#' @returns a list.
+#' @returns a data.frame.
 #' @export
 #'
 #' @examples
