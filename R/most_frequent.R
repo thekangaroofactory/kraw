@@ -38,6 +38,6 @@ most_frequent <- function(data){
 
 
   # extract
-  as.list(head(data[data$hash == y$hash, ], 1L))
+  head(data[data$hash == y$hash, ], 1L)
 
 }
