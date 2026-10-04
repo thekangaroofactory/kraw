@@ -17,6 +17,9 @@
 #' @importFrom ggplot2 .data
 #'
 #' @examples
+#' \dontrun{
+#' p_shutter_speed(data)
+#' }
 
 p_shutter_speed <- function(data, bg = "grey", theme = p_theme()){
 

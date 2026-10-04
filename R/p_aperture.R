@@ -17,6 +17,9 @@
 #' @importFrom ggplot2 .data
 #'
 #' @examples
+#' \dontrun{
+#' p_aperture(data)
+#' }
 
 p_aperture <- function(data, bg = "grey", theme = p_theme()){
 
