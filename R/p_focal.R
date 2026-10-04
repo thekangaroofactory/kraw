@@ -13,7 +13,7 @@
 #' - focal_length: numeric, the focal length
 #' - n: the number of images.
 #'
-#' @returns
+#' @returns a 'ggplot' object.
 #' @export
 #' @importFrom ggplot2 .data
 #'
@@ -35,8 +35,12 @@ p_focal <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
     geom_line(colour = fg,
               alpha = 0.5) +
 
-    geom_point(colour = fg, size = 2, alpha = 0.25) +
-    geom_point(colour = fg, size = 1, alpha = 0.5) +
+    geom_point(size = 2, alpha = 0.25) +
+    geom_point(aes(
+      colour = .data$lens_model),
+      size = 1,
+      alpha = 0.5,
+      show.legend = FALSE) +
 
     # -- title
     ggplot2::ggtitle("Focal length") +
