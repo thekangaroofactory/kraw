@@ -37,8 +37,11 @@ most_frequent <- function(data){
     dplyr::summarise(n = dplyr::n()) |>
     dplyr::filter(n == max(n))
 
-
   # extract
-  head(data[data$hash == y$hash, ], 1L)
+  x <- head(data[data$hash == y$hash, ], 1L)
+  x$n <- y$n
+
+  # return
+  x
 
 }
