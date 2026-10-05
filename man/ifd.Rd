@@ -7,15 +7,23 @@
 ifd(x, offset = 1)
 }
 \arguments{
-\item{x}{a raw vector}
+\item{x}{a raw vector.}
 
-\item{offset}{an integer to indicate where the sequence starts}
+\item{offset}{an integer to indicate where the sequence starts.}
 }
 \value{
-a list with the IFD information
+a list with the IFD information.
 }
 \description{
 Image File Directory
+}
+\details{
+The output list contains:
+\itemize{
+\item nb_entries: the number of entries
+\item entries: the entries
+\item offset_next_ifd: offset to the next ifd.
+}
 }
 \examples{
 \dontrun{

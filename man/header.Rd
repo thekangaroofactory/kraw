@@ -2,18 +2,29 @@
 % Please edit documentation in R/header.R
 \name{header}
 \alias{header}
-\title{CR2 Header}
+\title{CR2 Headers}
 \usage{
 header(x)
 }
 \arguments{
-\item{x}{a raw vector}
+\item{x}{a raw vector.}
 }
 \value{
-a list of values (TIFF & Canon headers)
+a list.
 }
 \description{
-CR2 Header
+Extract the TIFF and Canon headers.
+}
+\details{
+The function returns a list with the following elements:
+\itemize{
+\item endianness: order in which the bites are written (expecting little endian / II)
+\item magic_number: TIFF signature (expecting 42)
+\item offset_first_ifd: offset to first ifd
+\item cr_marker: raw marker (expecting 'CR+2')
+\item cr_version: raw marker version
+\item offset_ifd_raw: offset to first raw ifd
+}
 }
 \examples{
 \dontrun{

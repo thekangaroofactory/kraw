@@ -7,22 +7,28 @@
 ifd_entry(ifd, id, raw_vector = NULL, verbose = FALSE)
 }
 \arguments{
-\item{ifd}{an IFD list as return from the ifd function}
+\item{ifd}{an IFD list.}
 
-\item{id}{the id of the entry}
+\item{id}{the id of the entry.}
 
-\item{raw_vector}{the raw vector to extract value when an offset is involved}
+\item{raw_vector}{the raw vector to extract value when an offset is involved.}
 
-\item{verbose}{whether to turn ON/OFF console log}
+\item{verbose}{whether to turn ON/OFF console log.}
 }
 \value{
-a numeric value or a vector with the offset
+a numeric value or a vector with the offset.
 }
 \description{
 IFD Entry Value or Offset
+}
+\details{
+\code{ifd } expects a list as returned by the \code{\link[=ifd]{ifd()}} function.
 }
 \examples{
 \dontrun{
 ifd_entry(ifd, id = "0100")
 }
+}
+\seealso{
+\code{\link[=ifd]{ifd()}}
 }

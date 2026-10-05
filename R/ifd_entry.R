@@ -2,12 +2,17 @@
 
 #' IFD Entry Value or Offset
 #'
-#' @param ifd an IFD list as return from the ifd function
-#' @param id the id of the entry
-#' @param raw_vector the raw vector to extract value when an offset is involved
-#' @param verbose whether to turn ON/OFF console log
+#' @param ifd an IFD list.
+#' @param id the id of the entry.
+#' @param raw_vector the raw vector to extract value when an offset is involved.
+#' @param verbose whether to turn ON/OFF console log.
 #'
-#' @returns a numeric value or a vector with the offset
+#' @details
+#' `ifd ` expects a list as returned by the [ifd()] function.
+#'
+#' @seealso [ifd()]
+#'
+#' @returns a numeric value or a vector with the offset.
 #' @export
 #'
 #' @examples
@@ -25,9 +30,10 @@ ifd_entry <- function(ifd, id, raw_vector = NULL, verbose = FALSE){
     # -- get entry
     entry <- entries[entries$tag_id == id, ]
 
-    # -- entry types -----------------------------------------------------------
+    # //////////////////////////////////////////////////////////////////////////
+    # Entry types
 
-    # -- 2: string, ASCII 0 terminated -----------------------------------------
+    # -- 2: string, ASCII 0 terminated
     if(entry$tag_type == 2){
 
       if(verbose)
@@ -40,7 +46,7 @@ ifd_entry <- function(ifd, id, raw_vector = NULL, verbose = FALSE){
       return(rawToChar(x))}
 
 
-    # -- 3: ushort, unsigned 16 bits -------------------------------------------
+    # -- 3: ushort, unsigned 16 bits
     # out of 4 bytes available, should contain 0 for the 2 other bytes
     if(entry$tag_type == 3){
 
@@ -58,7 +64,7 @@ ifd_entry <- function(ifd, id, raw_vector = NULL, verbose = FALSE){
 
       return(to_num(x))}
 
-    # -- 4: ulong, unsigned 32bits ---------------------------------------------
+    # -- 4: ulong, unsigned 32bits
     # 32bits = 4 bytes
     if(entry$tag_type == 4){
 
@@ -79,7 +85,7 @@ ifd_entry <- function(ifd, id, raw_vector = NULL, verbose = FALSE){
       return(to_num(x))}
 
 
-    # -- 5: urational, numerator / denominator ulongs --------------------------
+    # -- 5: urational, numerator / denominator ulongs
     # ulong + ulong = 4 + 4
     if(entry$tag_type == 5){
 
@@ -99,7 +105,7 @@ ifd_entry <- function(ifd, id, raw_vector = NULL, verbose = FALSE){
 
       return(list(numerator = to_num(num), denominator = to_num(den)))}
 
-    # -- 7: ubyte, sequence ----------------------------------------------------
+    # -- 7: ubyte, sequence
     # return offset + tag_count
     return(c(offset = to_num(entry$tag_value), n = entry$tag_count))
 

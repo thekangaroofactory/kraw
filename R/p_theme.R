@@ -16,7 +16,13 @@ p_theme <- function(){
 
   ggplot2::theme_minimal() +
     ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
+
+      # -- panel & background
+      panel.grid = ggplot2::element_blank(),
+
+      # -- axis
+      axis.title = ggplot2::element_blank()
+
+      )
 
 }

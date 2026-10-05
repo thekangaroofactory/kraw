@@ -7,19 +7,21 @@
 order_bytes(x, endian = "II")
 }
 \arguments{
-\item{x}{a vector or data.frame of bytes}
+\item{x}{a vector or data.frame of bytes.}
 
-\item{endian}{the endianess}
+\item{endian}{the endianess.}
 }
 \value{
-the corresponding hexadecimal vector or data.frame
+the corresponding hexadecimal vector or data.frame.
 }
 \description{
 Order Bytes
 }
 \details{
-When x is a data.frame, value will be a data.frame, each row being
-the concatenation of the ordered columns
+When \code{x} is a data.frame, value will be a data.frame, each row being
+the concatenation of the ordered columns.
+
+Only little endian (i.e. "II") is supported.
 }
 \examples{
 \dontrun{
