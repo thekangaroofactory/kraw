@@ -4,10 +4,12 @@
 \alias{p_shutter_speed}
 \title{Shutter Speed Plot}
 \usage{
-p_shutter_speed(data, bg = "grey", theme = p_theme())
+p_shutter_speed(data, fg = "grey", bg = "grey", theme = p_theme())
 }
 \arguments{
 \item{data}{a data.frame (see details).}
+
+\item{fg}{a foreground color.}
 
 \item{bg}{a background color.}
 
