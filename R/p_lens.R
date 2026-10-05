@@ -24,32 +24,33 @@
 p_lens <- function(data, fg = "#000", bg = "grey", theme = p_theme()){
 
   # -- reorder
-  data$y <- stats::reorder(data$lens_model, data$n)
+  # data$y <- stats::reorder(data$lens_model, data$n)
 
   # -- init
   ggplot2::ggplot(data) +
 
     # -- segment
     ggplot2::geom_segment(ggplot2::aes(xend = .data$n,
-                                       y = y,
-                                       colour = .data$lens_model),
+                                       y = lens_model),
                           x = 0,
                           linewidth = 4,
-                          alpha = .5,
+                          colour = bg,
+                          alpha = 0.75,
                           lineend = "round",
                           show.legend = FALSE) +
 
     # -- labels
-    ggplot2::geom_text(ggplot2::aes(y = y,
-                                    label = .data$lens_model),
-                       x = 0,
-                       nudge_y = 0.1,
-                       hjust = 0) +
+    # ggplot2::geom_text(ggplot2::aes(y = lens_model,
+    #                                 label = .data$lens_model),
+    #                    x = 0,
+    #                    nudge_y = 0.1,
+    #                    hjust = 0) +
 
-    ggplot2::geom_text(ggplot2::aes(x = .data$n + 3,
-                                    y = y,
+    ggplot2::geom_text(ggplot2::aes(x = .data$n,
+                                    y = lens_model,
                                     label = .data$n),
-                       hjust = 0) +
+                       hjust = 1,
+                       size = 3) +
 
     # -- title
     ggplot2::ggtitle("Lens") +
@@ -60,6 +61,6 @@ p_lens <- function(data, fg = "#000", bg = "grey", theme = p_theme()){
     # -- apply theme
     theme +
     ggplot2::theme(
-      axis.text = ggplot2::element_blank())
+      axis.text.x = ggplot2::element_blank())
 
 }
