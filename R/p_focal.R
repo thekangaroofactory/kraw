@@ -26,28 +26,44 @@
 
 p_focal <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
 
-  ggplot2::ggplot(data, aes(x = .data$focal_length,
-                         y = .data$n,
-                         group = .data$lens_model)) +
+  data_range <- data |>
+    dplyr::group_by(lens_model) |>
+    dplyr::summarise(min = min(focal_length),
+                     max = max(focal_length))
 
-    geom_area(fill = bg,
-              alpha = 0.5) +
-    geom_line(colour = fg,
-              alpha = 0.5) +
+  # -- init
+  ggplot2::ggplot(data,
+                  ggplot2::aes(group = lens_model)) +
 
-    geom_point(size = 2, alpha = 0.25) +
-    geom_point(aes(
-      colour = .data$lens_model),
-      size = 1,
-      alpha = 0.5,
-      show.legend = FALSE) +
+    # -- background
+    ggplot2::geom_rect(data = data_range,
+                       ggplot2::aes(xmin = min,
+                                    xmax = max,
+                                    y = lens_model),
+                       height = .5,
+                       fill = bg,
+                       alpha = .1) +
+
+    ggplot2::geom_segment(data = data_range,
+                          ggplot2::aes(x = min,
+                                       xend = max,
+                                       y = lens_model),
+                          lineend = "round",
+                          alpha = .05) +
+
+    # -- foreground
+    ggplot2::geom_point(ggplot2::aes(x = focal_length,
+                                     y = lens_model,
+                                     size = n),
+                        fill = bg,
+                        colour = fg,
+                        alpha = 0.75,
+                        show.legend = F) +
 
     # -- title
     ggplot2::ggtitle("Focal length") +
 
     # -- apply theme
-    theme +
-    ggplot2::theme(
-      axis.text.y = ggplot2::element_blank())
+    theme
 
 }
