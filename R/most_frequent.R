@@ -13,6 +13,7 @@
 #'
 #' @returns a data.frame.
 #' @export
+#' @importFrom utils head
 #'
 #' @examples
 #' \dontrun{
