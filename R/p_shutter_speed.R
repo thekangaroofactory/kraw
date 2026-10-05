@@ -3,6 +3,7 @@
 #' Shutter Speed Plot
 #'
 #' @param data a data.frame (see details).
+#' @param fg a foreground color.
 #' @param bg a background color.
 #' @param theme an optional theme function.
 #'
@@ -21,18 +22,24 @@
 #' p_shutter_speed(data)
 #' }
 
-p_shutter_speed <- function(data, bg = "grey", theme = p_theme()){
+p_shutter_speed <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
 
-  ggplot2::ggplot(data) +
-    ggplot2::geom_segment(ggplot2::aes(yend = .data$n,
-                                       x = .data$exposure_time,
-                                       group = .data$lens_model,
-                                       colour = .data$lens_model),
-                          y = 0,
-                          lineend = "round",
-                          linewidth = 4,
-                          alpha = .5,
-                          show.legend = FALSE) +
+  # compute sequence (order)
+  ref <- names(sort(sapply(unique(data$exposure_time), function(x) eval(parse(text = x)))))
+
+  # init
+  ggplot2::ggplot(data,
+                  ggplot2::aes(x = lens_model,
+                               y = factor(exposure_time, levels = ref),
+                               group = lens_model)) +
+
+    # density
+    see::geom_violinhalf(colour = fg,
+                         fill = bg) +
+
+    # flip horizontal
+    ggplot2::coord_flip() +
+    scale_y_discrete(breaks = ref[c(TRUE, FALSE, FALSE, FALSE, FALSE)]) +
 
     # tittle
     ggplot2::ggtitle("Shutter speed") +
