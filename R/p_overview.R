@@ -42,9 +42,9 @@ p_overview <- function(metadata){
                        bg = "#D6CCC2")
 
   # -- Aperture
-  f_number <- p_aperture(data = metadata |>
-                           dplyr::group_by(lens_model, f_number) |>
-                           dplyr::summarise(n = dplyr::n()))
+  f_number <- p_aperture(data = metadata,
+                         fg = "#D6CCC2",
+                         bg = "#D6CCC2")
 
   # -- focal length
   focal_length <- p_focal(data = metadata |>
