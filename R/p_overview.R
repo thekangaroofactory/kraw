@@ -54,34 +54,20 @@ p_overview <- function(metadata){
                           bg = "#D6CCC2")
 
   # -- ISO
-  iso_speed <- ggplot2::ggplot(metadata |>
-                                 dplyr::group_by(iso_speed) |>
-                                 dplyr::summarise(n = dplyr::n())) +
-    ggplot2::geom_bar(ggplot2::aes(x = .data$n,
-                                   y = stats::reorder(iso_speed, .data$n)),
-                      stat = "identity",
-                      fill = "#D6CCC2",
-                      show.legend = FALSE) +
-    ggplot2::ggtitle("ISO Speed") +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.title = ggplot2::element_blank(),
-      panel.grid = ggplot2::element_blank())
+  iso_speed <- p_iso(data = metadata |>
+                       dplyr::group_by(lens_model, iso_speed) |>
+                       dplyr::summarise(n = dplyr::n()),
+                     bg = "#D6CCC2")
 
 
   # -- Shutter speed
-  exposure_time <- p_shutter_speed(data = metadata |>
-                                     dplyr::group_by(lens_model, exposure_time) |>
-                                     dplyr::summarise(n = dplyr::n()))
-
-  # -- Most frequent combination
-  fav_comb <- p_favorite(most_frequent(metadata))
+  exposure_time <- p_shutter_speed(data = metadata, fg = "#D6CCC2", bg = "#D6CCC2")
 
 
   # ////////////////////////////////////////////////////////////////////////////
   # Legend
 
-  label = paste(nrow(metadata), paste0("RAW Image", if(nrow(metadata) > 1) "s", "\n"),
+  label <- paste(nrow(metadata), paste0("RAW Image", if(nrow(metadata) > 1) "s", "\n"),
                 nrow(camera$data), paste0("Camera", if(nrow(camera$data) > 1) "s", "\n"),
                 nrow(lens_model$data), paste0("Lense", if(nrow(lens_model$data) > 1) "s"), sep = "")
 
@@ -93,11 +79,28 @@ p_overview <- function(metadata){
 
 
   # ////////////////////////////////////////////////////////////////////////////
+  # Most frequent
+
+  x <- most_frequent(metadata)
+
+  txt <- paste(x$camera, "\n",
+               x$lens_model, "\n",
+               paste0(x$focal_length, "mm"), " • ", x$f_number, " • ", x$exposure_time, " • ", paste0(x$iso_speed, "ISO"),
+               sep = "")
+
+  text_box <- ggplot2::ggplot() +
+    ggplot2::theme_void() +
+    ggplot2::geom_text(ggplot2::aes(label = txt),
+                       x = 0.2, y = 0.5, hjust = 0,
+                       size = 7, color = "#BEAD9D", lineheight = 0.8)
+
+
+  # ////////////////////////////////////////////////////////////////////////////
   # Layout & return
 
   ggpubr::ggarrange(legend, camera, orientation,
                     lens_model, f_number, focal_length,
-                    exposure_time, iso_speed, fav_comb,
+                    exposure_time, iso_speed, text_box,
                     ncol = 3, nrow = 3,
                     heights = c(1, 2, 2)) +
     ggpubr::bgcolor("#FFF")
