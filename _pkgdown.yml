@@ -1,3 +1,40 @@
 url: https://thekangaroofactory.github.io/kraw/
+
+authors:
+  Philippe Peret:
+    href: https://www.linkedin.com/in/philippeperet/
+
 template:
   bootstrap: 5
+  light-switch: true
+
+reference:
+- title: High level functions
+  desc: .
+  contents:
+  - scan
+  - most_frenquent
+  - p_overview
+
+- title: Plot functions
+  desc: Used to generate specific plots or theme.
+  contents:
+  - p_aperture
+  - p_camera
+  - p_focal
+  - p_iso
+  - p_lens
+  - p_orientation
+  - p_shutter_speed
+  - p_theme
+
+- title: Core functions
+  desc: Used to read & analyze the binary files.
+  contents:
+  - header
+  - ifd
+  - ifd_entry
+  - order_bytes
+  - raw_bytes
+  - read_cr2
+  - utils
