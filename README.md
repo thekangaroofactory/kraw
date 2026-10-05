@@ -6,8 +6,7 @@ Read and extract metadata information from CR2 raw camera images.
 
 The package can be installed from R-universe:
 
-```{r}
-
+``` r
 # Install 'kraw' in R:
 install.packages('kraw', repos = c('https://thekangaroofactory.r-universe.dev', 'https://cloud.r-project.org'))
 ```
@@ -16,8 +15,7 @@ install.packages('kraw', repos = c('https://thekangaroofactory.r-universe.dev', 
 
 Generate the metadata from a path containing .cr2 files:
 
-```{r}
-
+``` r
 library(kraw)
 
 # scan files
@@ -26,8 +24,7 @@ metadata <- scan(path = ".")
 
 Once the metadata table is ready, build the print:
 
-```{r}
-
+``` r
 # plot
 p_overview(metadata)
 ```

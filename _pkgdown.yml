@@ -9,11 +9,11 @@ template:
   light-switch: true
 
 reference:
-- title: High level functions
-  desc: .
+- title: Basic scenario
+  desc: Scan & print.
   contents:
   - scan
-  - most_frenquent
+  - most_frequent
   - p_overview
 
 - title: Plot functions
@@ -37,4 +37,5 @@ reference:
   - order_bytes
   - raw_bytes
   - read_cr2
-  - utils
+  - to_num
+  - tag_id
