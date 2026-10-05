@@ -27,34 +27,34 @@
 p_focal <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
 
   data_range <- data |>
-    dplyr::group_by(lens_model) |>
-    dplyr::summarise(min = min(focal_length),
-                     max = max(focal_length))
+    dplyr::group_by(.data$lens_model) |>
+    dplyr::summarise(min = min(.data$focal_length),
+                     max = max(.data$focal_length))
 
   # -- init
   ggplot2::ggplot(data,
-                  ggplot2::aes(group = lens_model)) +
+                  ggplot2::aes(group = .data$lens_model)) +
 
     # -- background
     ggplot2::geom_rect(data = data_range,
-                       ggplot2::aes(xmin = min,
-                                    xmax = max,
-                                    y = lens_model),
+                       ggplot2::aes(xmin = .data$min,
+                                    xmax = .data$max,
+                                    y = .data$lens_model),
                        height = .5,
                        fill = bg,
                        alpha = .1) +
 
     ggplot2::geom_segment(data = data_range,
-                          ggplot2::aes(x = min,
-                                       xend = max,
-                                       y = lens_model),
+                          ggplot2::aes(x = .data$min,
+                                       xend = .data$max,
+                                       y = .data$lens_model),
                           lineend = "round",
                           alpha = .05) +
 
     # -- foreground
-    ggplot2::geom_point(ggplot2::aes(x = focal_length,
-                                     y = lens_model,
-                                     size = n),
+    ggplot2::geom_point(ggplot2::aes(x = .data$focal_length,
+                                     y = .data$lens_model,
+                                     size = .data$n),
                         fill = bg,
                         colour = fg,
                         alpha = 0.75,

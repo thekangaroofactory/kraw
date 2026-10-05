@@ -14,6 +14,7 @@
 #' @returns a data.frame.
 #' @export
 #' @importFrom utils head
+#' @importFrom ggplot2 .data
 #'
 #' @examples
 #' \dontrun{
@@ -24,7 +25,8 @@ most_frequent <- function(data){
 
   # select columns
   data <- data |>
-    dplyr::select(camera, orientation, exposure_time, f_number, iso_speed, lens_model, focal_length)
+    dplyr::select(.data$camera, .data$orientation, .data$exposure_time,
+                  .data$f_number, .data$iso_speed, .data$lens_model, .data$focal_length)
 
   # compute hash
   data$hash <- apply(data,
@@ -33,9 +35,9 @@ most_frequent <- function(data){
 
   # most frequent hash
   y <- data |>
-    dplyr::group_by(hash) |>
+    dplyr::group_by(.data$hash) |>
     dplyr::summarise(n = dplyr::n()) |>
-    dplyr::filter(n == max(n))
+    dplyr::filter(.data$n == max(.data$n))
 
   # extract
   x <- head(data[data$hash == y$hash, ], 1L)

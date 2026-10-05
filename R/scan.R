@@ -16,10 +16,10 @@ scan <- function(path){
 
   # -- folder files
   files <- list.files(path, pattern = "*.CR2", full.names = TRUE, recursive = TRUE)
-  cat(crayon::silver("-"), "number of files to extract:", crayon::blue(length(files)))
+  cat("- number of files to extract:", length(files))
 
   # -- progress
-  pb <- txtProgressBar(min = 0, max = length(files), initial = 0, char = "=",
+  pb <- utils::txtProgressBar(min = 0, max = length(files), initial = 0, char = "=",
                        width = 50, style = 3)
 
   # -- read metadata & merge
@@ -27,7 +27,7 @@ scan <- function(path){
 
     x <- files[[n]]
     data <- read_cr2(x, mapping_exif = mapping_exif, mapping_canon = mapping_canon)
-    setTxtProgressBar(pb, value = n)
+    utils::setTxtProgressBar(pb, value = n)
     data
 
     }))

@@ -29,9 +29,9 @@ p_shutter_speed <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
 
   # init
   ggplot2::ggplot(data,
-                  ggplot2::aes(x = lens_model,
-                               y = factor(exposure_time, levels = ref),
-                               group = lens_model)) +
+                  ggplot2::aes(x = .data$lens_model,
+                               y = factor(.data$exposure_time, levels = ref),
+                               group = .data$lens_model)) +
 
     # density
     see::geom_violinhalf(colour = fg,
@@ -39,7 +39,7 @@ p_shutter_speed <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
 
     # flip horizontal
     ggplot2::coord_flip() +
-    scale_y_discrete(breaks = ref[c(TRUE, FALSE, FALSE, FALSE, FALSE)]) +
+    ggplot2::scale_y_discrete(breaks = ref[c(TRUE, FALSE, FALSE, FALSE, FALSE)]) +
 
     # tittle
     ggplot2::ggtitle("Shutter speed") +

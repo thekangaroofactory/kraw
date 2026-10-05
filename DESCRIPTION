@@ -18,5 +18,6 @@ Imports:
     ggplot2,
     ggforce,
     ggpubr,
-    stats
+    digest,
+    see
 Config/roxygen2/version: 8.1.0

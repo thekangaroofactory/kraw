@@ -28,9 +28,9 @@ p_aperture <- function(data, fg = "grey", bg = "grey", theme = p_theme()){
 
   # init
   ggplot2::ggplot(data,
-                  ggplot2::aes(x = lens_model,
-                               y = factor(f_number, levels = ref),
-                               group = lens_model)) +
+                  ggplot2::aes(x = .data$lens_model,
+                               y = factor(.data$f_number, levels = ref),
+                               group = .data$lens_model)) +
 
     # density
     see::geom_violinhalf(colour = fg,

@@ -85,7 +85,7 @@ p_overview <- function(metadata){
 
   txt <- paste(x$camera, "\n",
                x$lens_model, "\n",
-               paste0(x$focal_length, "mm"), " • ", x$f_number, " • ", x$exposure_time, " • ", paste0(x$iso_speed, "ISO"),
+               paste0(x$focal_length, "mm"), " \u2022 ", x$f_number, " \u2022 ", x$exposure_time, " \u2022 ", paste0(x$iso_speed, "ISO"),
                sep = "")
 
   text_box <- ggplot2::ggplot() +
